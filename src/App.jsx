@@ -12,6 +12,7 @@ import RegisterPage from "./components/SignPage";
 import LoginPage from "./components/LoginPage";
 import Footer from "./components/Footer";
 import CartProvider from "./pages/CartPage"; 
+import CheckoutPage from "./pages/CheckoutPage"; 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="bestsellers" element={<Bestsellers />} />
       <Route path="cart" element={<CartPage />} />
       <Route path="profile" element={<Profile />} />
+      <Route path="checkout" element={<CheckoutPage cart={[]} />} />
     </Route>
   )
 );
