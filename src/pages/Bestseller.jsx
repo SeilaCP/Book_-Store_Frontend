@@ -6,4 +6,4 @@ function Bestsellers() {
     );
 }
 
-export default Bestsellers
+export default Bestsellers;

@@ -1,8 +1,8 @@
 import { Star, ChevronRight, Heart, Share, ShoppingCart } from "lucide-react"
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import BookGrid from "./Book-grid";
 import { bookData } from "../data/booksData";
-import { addToCart } from "../data/cartDataAPI";
+import { useCart } from "@/pages/CartPage";
 
 function findBookById(bookId) {
   // Loop through each category in bookData
@@ -18,20 +18,17 @@ function findBookById(bookId) {
   return null; 
 }
 
-
 export default function BookDetail({id}) {
   // This would normally come from an API or database based on the ID
   const book = findBookById(Number.parseInt(id));
-
-  if (!book) {
-    return <div>Book not found</div>; // Handle case where book is not found
-  }
-  console.log(book);
+  const { addToCart } = useCart();
+  const [showCartMessage, setShowCartMessage] = useState(false);
 
   const handleAddToCart = () => {
-    addToCart(book); // Add the book to the cart
-    alert(`${book.title} has been added to the cart!`); // Optional: Show confirmation
+    addToCart(book, 1); // Add the book to the cart
+    setShowCartMessage(true); // Show the cart message
   };
+
   return (
 
     <div className="container mx-auto px-4 py-6 sm:px-6">
@@ -55,11 +52,7 @@ export default function BookDetail({id}) {
             <div className="sticky top-24 overflow-hidden rounded-lg border">
               <div className="relative aspect-[2/3] w-full">
                 <img src={book.cover || "https://via.placeholder.com/300x450"} alt={book.title} className="object-cover w-full h-full" />
-                {/* <img
-                  src={book.cover || ""}
-                  alt={book.title}
-                  className="object-cover w-full h-full"
-                /> */}
+          
               </div>
             </div>
           </div>
@@ -97,6 +90,20 @@ export default function BookDetail({id}) {
                 <Share className="h-5 w-5" />
               </button>
             </div>
+            {/* Conditional Cart Message */}
+            {showCartMessage && (
+                <div className="mt-4 p-4 border rounded-lg bg-gray-100">
+                  <p className="text-sm text-gray-700">
+                    Item added to cart!{" "}
+                    <a
+                      href="/cart"
+                      className="text-blue-600 hover:underline font-medium"
+                    >
+                      Go to Cart
+                    </a>
+                  </p>
+                </div>
+              )}
 
             <div className="mb-8">
               <h2 className="text-xl font-semibold mb-3">Description</h2>
@@ -232,6 +239,7 @@ export default function BookDetail({id}) {
             </div>
           </div>
         </section>
+        
       </main>
     </div>
     </div>

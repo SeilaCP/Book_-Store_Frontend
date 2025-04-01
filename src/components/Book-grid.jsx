@@ -28,7 +28,7 @@ export default function BookGrid({ category, title, allBooks }) {
   };
 
   return (
-    <div className="relative mt-10">
+    <div className="px-4 relative mt-10">
       {title && (
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-2xl font-bold">{title}</h2>
@@ -36,17 +36,17 @@ export default function BookGrid({ category, title, allBooks }) {
       )}
 
       {hasPreviousBooks && (
-        <button onClick={showPreviousBooks} className="absolute -left-4 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm hover:bg-background" aria-label="Previous books">
+        <button onClick={showPreviousBooks} className="absolute  z-10 left-4 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm hover:bg-background" aria-label="Previous books">
           <ChevronLeft className="h-6 w-6" />
         </button>
       )}
       {hasMoreBooks && (
-        <button onClick={showNextBooks} className="absolute -right-0 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm hover:bg-background" aria-label="Next books">
-          <ChevronRight className="h-6 w-6" />
+        <button onClick={showNextBooks} className="absolute z-10 right-4 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 shadow-md backdrop-blur-sm hover:bg-background" aria-label="Next books">
+          <ChevronRight className="h-8 w-8" />
         </button>
       )}
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
         {visibleBooks.map((book) => (
           <div key={book.id} className="group relative">
             <div
